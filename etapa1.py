@@ -2,13 +2,10 @@ from os import system, write
 from datetime import datetime, date
 
 def current_datatime():
-    now = datetime.now()
-    hoy = date(now.year, now.month, now.day).ctime()
-    fecha = hoy.split()
-    message = now.strftime(f"{fecha[0]} {fecha[1]} %d %H:%M:%S %Y")
+    message = datetime.now().strftime("%a %b %d %H:%M:%S %Y")
     return message
 
-def in_out_Register(op, name, total):
+def in_out_register(op, name, total):
     todayDate = current_datatime()
     if op == 1:
         with open("registros.txt", "a") as f:
@@ -20,7 +17,7 @@ def in_out_Register(op, name, total):
             f.write(f"OUT {todayDate}; Encargad@: {name} ${total}")
             f,write(end_line*50)
     
-def reg_client(name, order, total):
+def register_client(name, order, total):
     todayDate = current_datatime()
     s, d, t, p = order
     with open("ventas.txt", "a") as f:
@@ -35,11 +32,14 @@ def welcome():
 
 def operation():
     while True:
-        op = int(input("1 - Ingreso nuevo pedido\n2 - Cambio de turno\n3 - Apagar sistema\n"))
-        if not isinstance(op, int) or (op<1 or op>3):
-            print("El valor ingresado es incorrecto")
-        else:
+        op = input("1 - Ingreso nuevo pedido\n2 - Cambio de turno\n3 - Apagar sistema\n")
+        
+        if op.isdecimal() and op in ["1","2","3"]:
+            op = int(op)
             break
+        else:
+            print("El valor ingresado es incorrecto")
+
     return op
 
 def order_validation(type):
@@ -84,19 +84,19 @@ def load_order():
 def main():
     total = 0
     name = welcome()
-    in_out_Register(1, name, 0)
+    in_out_register(1, name, 0)
     while True:
         op = operation()
         if op == 1:
             total += load_order()
         elif op == 2:
-            in_out_Register(2, name,total)
+            in_out_register(2, name,total)
             total = 0
             print("\n")
             name = welcome()
-            in_out_Register(1,name,0)
+            in_out_register(1,name,0)
         else: 
-            in_out_Register(2, name,total)
+            in_out_register(2, name,total)
             break
     print("Adios, tenga un buen dia!")
     system("pause")
