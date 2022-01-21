@@ -1,33 +1,6 @@
-from os import system, write
-from datetime import datetime, date
+from os import system
+import Register as reg
 
-
-def current_datatime():
-    """
-    -Esta funcion retorna la fecha y hora para anexar al registro y a las ventas.
-    -This function returns date and time to index into the sells and IN/OUT register.
-    """
-    message = datetime.now().strftime("%a %b %d %H:%M:%S %Y")
-    return message
-
-def in_out_register(op: int, name: str, total: float):
-    todayDate = current_datatime()
-    if op == 1:
-        with open("registros.txt", "a") as f:
-            f.write(f"IN {todayDate}; Encargad@: {name}")
-    
-    elif op == 2:
-        end_line = "#"
-        with open("registros.txt", "a") as f:
-            f.write(f"OUT {todayDate}; Encargad@: {name} ${total}")
-            f,write(end_line*50)
-    
-def register_client(name: str, order: list, total: float):
-    todayDate = current_datatime()
-    s, d, t, p = order
-    with open("ventas.txt", "a") as f:
-                f.write(f"{name}; {todayDate}; {s}; {d}; {t}; {p}; ${total}")
-    
 def welcome():
     print("Bienvenido a Hamburguesas IT")
     name = input("Ingrese su nombre encargad@: ")
@@ -80,7 +53,7 @@ def load_order():
             else:
                 print("Respuesta incorrecta")
         if ans.capitalize == "Y":
-            reg_client(name, order, total)
+            reg.register_client(name, order, total)
             print("\n")
             return total
         else: 
@@ -89,21 +62,22 @@ def load_order():
 def main():
     total = 0
     name = welcome()
-    in_out_register(1, name, 0)
+    reg.in_out_register(1, name, 0)
     while True:
         op = operation()
         if op == 1:
             total += load_order()
         elif op == 2:
-            in_out_register(2, name,total)
+            reg.in_out_register(2, name,total)
             total = 0
             print("\n")
             name = welcome()
-            in_out_register(1,name,0)
+            reg.in_out_register(1,name,0)
         else: 
-            in_out_register(2, name,total)
+            reg.in_out_register(2, name,total)
             break
     print("Adios, tenga un buen dia!")
     system("pause")
 
-main()
+if __name__ == '__main__':
+    main()
