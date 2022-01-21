@@ -1,11 +1,16 @@
 from os import system, write
 from datetime import datetime, date
 
+
 def current_datatime():
+    """
+    -Esta funcion retorna la fecha y hora para anexar al registro y a las ventas.
+    -This function returns date and time to index into the sells and IN/OUT register.
+    """
     message = datetime.now().strftime("%a %b %d %H:%M:%S %Y")
     return message
 
-def in_out_register(op, name, total):
+def in_out_register(op: int, name: str, total: float):
     todayDate = current_datatime()
     if op == 1:
         with open("registros.txt", "a") as f:
@@ -17,7 +22,7 @@ def in_out_register(op, name, total):
             f.write(f"OUT {todayDate}; Encargad@: {name} ${total}")
             f,write(end_line*50)
     
-def register_client(name, order, total):
+def register_client(name: str, order: list, total: float):
     todayDate = current_datatime()
     s, d, t, p = order
     with open("ventas.txt", "a") as f:
