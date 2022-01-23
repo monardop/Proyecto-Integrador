@@ -1,10 +1,6 @@
 from datetime import datetime, date
 import sqlite3
 
-from sqlparse import sql
-
-
-
 def current_datatime():
     """
     -Esta funcion retorna la fecha y hora para anexar al registro y a las ventas.
