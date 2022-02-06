@@ -1,13 +1,10 @@
-from logging import PlaceHolder
 from tkinter import *
-
-from matplotlib.pyplot import text
 
 root = Tk() #creo la ventana
 root.title("Delivery")
 
 #label muestra texto
-titulo = Label(root, text="-------Pedidos-------", fg="white", bg= "red").grid(row=0,column=2)
+titulo = Label(root, text="-------Pedidos-------", fg="white", bg= "red").grid(row=0, column=2)
 encargado = Label(root, text="Nombre del encargado").grid(column=1)
 comboS = Label(root, text="Combo simple").grid(column=1)
 comboD = Label(root, text="Combo doble").grid(column=1)
