@@ -1,4 +1,3 @@
-import tkinter as tk
 from tkinter import messagebox
 import datetime
 import sqlite3
@@ -14,12 +13,20 @@ class Vendedor():
         pass
 
 class Venta():
+
     """
     Cada venta será tratada como un objeto para facilitar el trabajo del vendedor. 
     """
-    def __init__(self, nombre, cS, cD, cT, pos):
     
-        def obtener_datos(self, cS, cD, cT, pos):
+    def __init__(self, nombre: str, cS: int, cD: int, cT: int, pos: int):
+
+        self.cliente = nombre
+        self.comboS = cS
+        self.comboD = cD
+        self.comboT = cT
+        self.postre = pos
+        
+        def obtener_datos(self, cS: int, cD: int, cT: int, pos: int):
             self.comboS = cS*5
             self.comboD = cD*6
             self.comboT = cT*7
@@ -41,38 +48,17 @@ class Venta():
             valor = convertir_pesos()
             self.comboS, self.comboD, self.comboT, self.postre *= valor
             total = self.comboS + self.comboD + self.comboT + self.postre
+            messagebox.showinfo(title="Compra realizada", message=f"La compra fue realizada. El total es de ${total} ARS")
             return total
-        def cargar_venta(): #esta funcion va a cargar el registro de ventas (base de datos)
-            pass
-        
-        self.cliente = nombre
+        def cargar_venta(cliente:str, s: float,d: float,t: float,p: float,total: float): #esta funcion va a cargar el registro de ventas (base de datos)
+            fecha = datetime.now().strftime("%a %b %d %H:%M:%S %Y")
+            conn = sqlite3.connect('comercio.sqlite')
+            cursor = conn.cursor()
+            cursor.execute("INSERT INTO ventas VALUES(?,?,?,?,?,?,?,?)", (cliente,fecha, s,d,t,p,total))
+            conn.commit()
+            conn.close()
+
         obtener_datos(cS,cD,cT,pos)
         self.total = total_venta()
-        messagebox.showinfo(title="Compra realizada", message=f"La compra fue realizada. El total es de ${self.total} ARS")
-    
-def current_datatime():
-    message = datetime.now().strftime("%a %b %d %H:%M:%S %Y")
-    return message
-
-def pedido_sumatoria(cS, cD, cT, pos):
-    comboS = (cS.get())*5
-    comboD = (cD.get())*6
-    comboT = (cT.get())*7
-    postre = (pos.get())*2
-    total = comboS + comboD + comboT + postre
-    return total
-
-def boton_pedido(en, cS, cD, cT, pos, cli):
-    encargado_actual = "Nuevo"
-    
-    if encargado_actual == "Nuevo":
-        encargado_actual = en
-        totalGeneral = 0
-    else:
-        if encargado_actual != en:
-            #aca crearia el registro de salida del empleado anterior.
-            totalGeneral = 0
-    nuevo_ingreso = pedido_sumatoria(cS, cD, cT, pos)
-    #aca cargo la venta al registro de ventas.
-    totalGeneral += nuevo_ingreso
+        cargar_venta(self.cliente, self.comboS, self.comboD, self.comboT, self.postre, self.total)
     
