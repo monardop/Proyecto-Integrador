@@ -1,3 +1,4 @@
+import enum
 from tkinter import messagebox
 import datetime
 import sqlite3
@@ -46,8 +47,12 @@ class Venta():
         def total_venta():
             #uso el valor obtenido del dolar-peso para transformar el precio de las ventas a pesos.    
             valor = convertir_pesos()
-            self.comboS, self.comboD, self.comboT, self.postre *= valor
-            total = self.comboS + self.comboD + self.comboT + self.postre
+            lista = [0]
+            for i,j in enumerate(self.comboS, self.comboD, self.comboT, self.postre):
+                lista[i] = j
+            for i,j in enumerate(lista):
+                lista[i] = j*valor
+                total += lista[i]
             messagebox.showinfo(title="Compra realizada", message=f"La compra fue realizada. El total es de ${total} ARS")
             return total
         def cargar_venta(cliente:str, s: float,d: float,t: float,p: float,total: float): #esta funcion va a cargar el registro de ventas (base de datos)
