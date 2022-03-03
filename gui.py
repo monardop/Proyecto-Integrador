@@ -50,7 +50,7 @@ class App(Frame):
         salida.grid(row=7, column=1)
         cancel = Button(self, text="Cancelar pedido", width=15, pady=5)
         cancel.grid(row=7, column=2)
-        submit = Button(self, text="Hacer pedido", width=15, pady=5).
+        submit = Button(self, text="Hacer pedido", width=15, pady=5)
         submit.grid(row=7, column=3)
 
         self.pack()
