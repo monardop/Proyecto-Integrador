@@ -1,5 +1,5 @@
 from tkinter import *
-from tkinter.ttk import Style
+import botones as bt
 
 class App(Frame):
     def __init__(self):
@@ -46,11 +46,11 @@ class App(Frame):
         cli = Entry(self, width=15).grid(column=3, row=6)
 
         #botones
-        salida = Button(self, text="Salir", width=15, pady=5)
+        salida = Button(self, text="Salir", width=15, pady=5, command= bt.salir())
         salida.grid(row=7, column=1)
-        cancel = Button(self, text="Cancelar pedido", width=15, pady=5)
+        cancel = Button(self, text="Cancelar pedido", width=15, pady=5, command= bt.cancelar())
         cancel.grid(row=7, column=2)
-        submit = Button(self, text="Hacer pedido", width=15, pady=5)
+        submit = Button(self, text="Hacer pedido", width=15, pady=5, command= bt.confirmar())
         submit.grid(row=7, column=3)
 
         self.pack()

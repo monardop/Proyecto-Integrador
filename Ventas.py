@@ -18,6 +18,7 @@ class Vendedor():
     def __init__(self, nombre: str) -> None:
         self.vendedor = nombre
         self.total = 0     
+        
    
 class Venta():
 

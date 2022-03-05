@@ -3,15 +3,19 @@ import datetime
 import sys
 import ventas
 import gui
+import funciones_botones as fb
 
 
 ##############################################
 
 def cancelar():
-    pass
+    rta = fb.cartel_confirma()
+    if rta == 1:
+        fb.borrar_campos()
 
 def salir():
-    pass
+    rta = fb.cartel_confirma()
+    
             
 def confirmar():
     pass
