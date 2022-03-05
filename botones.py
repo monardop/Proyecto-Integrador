@@ -15,7 +15,8 @@ def cancelar():
 
 def salir():
     rta = fb.cartel_confirma()
-    
+    if rta == 1:
+        fb.cerrar_app()
             
 def confirmar():
     pass

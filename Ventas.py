@@ -4,22 +4,6 @@ import sqlite3
 import requests
 import sys
 
-class Vendedor():
-    
-    def llenar_registro(self, op: str, vendedor: str, total: float):
-        #Esta función llena el registro de entrada y salida de vendedores.
-        date = datetime.now().strftime("%a %b %d %H:%M:%S %Y")
-        conn = sqlite3.connect('comercio.sqlite')
-        cursor = conn.cursor()
-        cursor.execute("INSERT INTO registro VALUES(?,?,?,?)", (op, date, vendedor, total))
-        conn.commit()
-        conn.close()
-    
-    def __init__(self, nombre: str) -> None:
-        self.vendedor = nombre
-        self.total = 0     
-        
-   
 class Venta():
 
     """

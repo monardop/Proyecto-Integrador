@@ -52,7 +52,6 @@ class App(Frame):
         cancel.grid(row=7, column=2)
         submit = Button(self, text="Hacer pedido", width=15, pady=5, command= bt.confirmar())
         submit.grid(row=7, column=3)
-
         self.pack()
 
 def main():
