@@ -6,6 +6,8 @@ import ventas
 import gui
 import sqlite3
 
+###################################################################
+
 def borrar_campos():
     gui.cS.delete()
     gui.cD.delete()
@@ -21,6 +23,7 @@ def cartel_confirma():
         return 0
 
 def cheq_vendedor():
+    #Esta función chequea que el vendedor anterior sea el mismo que en el nuevo pedido. De serlo, se suma el total. En caso contrario, se envia los datos para llenar registro. *Sin terminar
     vendedor = str(gui.en.get())
     with open("Vendedor.txt", "r") as f:
         vendedor_anterior = f.read()
@@ -31,13 +34,14 @@ def cheq_vendedor():
     else:
         return 1
 def cerrar_app():
+    #Funcion del boton salir. Básicamente crea un .txt que guardara el nombre del ultimo vendedor 
     vendedor = str(gui.en.get())
     with open("Vendedor.txt", "w") as f:
         f.write(vendedor)
     messagebox.showinfo(title="Salir", message="Cerrando app")
     sys.exit()
 
-def llenar_registro(self, op: str, vendedor: str, total: float):
+def llenar_registro( op: str, vendedor: str, total: float):
     #Esta función llena el registro de entrada y salida de vendedores.
     date = datetime.now().strftime("%a %b %d %H:%M:%S %Y")
     conn = sqlite3.connect('comercio.sqlite')
@@ -47,12 +51,14 @@ def llenar_registro(self, op: str, vendedor: str, total: float):
     conn.close()
 
 def control_validez(x):
-
+    """Con esta función controlo que lo ingresado en los campos de pedidos sean nros enteros no negativos."""
     if x is isinstance(x, int):
         if x < 0: 
             return 1
     else:
         return 1
+
+
 def crear_venta():
     """Con la variable x creo una bandera para identificar si hubo un error al cargar los datos, dado que estos serán ingresados de forma manual y estos no pueden ser algo distinto de un entero positivo.
     Una vez comprobado los datos, creo el objeto venta que se encarga de obtener precios y cargarlos al servidor. De este objeto me llevo el total de esa venta."""
