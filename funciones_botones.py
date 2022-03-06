@@ -28,7 +28,7 @@ def cheq_vendedor():
     vendedor = str(gui.en.get())
     if vendedor == "":
         messagebox.showerror(title="Error", message="No ingresó el nombre de vendedor")
-        return 2
+        return 1
 
     try:
         with open("Vendedor.txt", "r") as f:
@@ -47,15 +47,16 @@ def cheq_vendedor():
                 total = float(f.read())
         except FileNotFoundError:
             messagebox.showerror(title="Error", message="Ha ocurrido un error.")
-            return 2
+            return 1
         llenar_registro("OUT", vendedor_anterior, total)  
+        llenar_registro("IN", vendedor, 0)
         with open("Vendedor.txt", "w") as f:
             f.write(vendedor)
         with open("ventaTotal.txt", "w") as f:
             f.write("0")
         return 0
     else:
-        return 1
+        return 0
 
 
 def cerrar_app():
@@ -104,7 +105,7 @@ def crear_venta():
         venta = ventas.Venta(cliente, comboS,comboD,comboT,postre)
         return venta.total
     else:
-        return 1 
+        return -1 
 
 def suma_ventas(total: float):
     with open("ventaTotal.txt", "w") as f:

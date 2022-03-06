@@ -19,4 +19,11 @@ def salir():
         fb.cerrar_app()
             
 def confirmar():
-    pass
+    vendedor = fb.cheq_vendedor() 
+    if vendedor == 0:
+        total = fb.crear_venta()
+        if total != (-1):
+            fb.suma_ventas(total)
+            messagebox.showinfo(title="Venta confirmada", message=f"La venta fue exitosa con un total de ${total}")
+            fb.borrar_campos()
+
