@@ -15,8 +15,8 @@ def borrar_campos():
     gui.pos.delete()
     gui.cli.delete()
 
-def cartel_confirma():
-    rta = messagebox.askquestion(message="¿Está seguro?")
+def cartel_confirma(op: str):
+    rta = messagebox.askquestion(message="¿Está seguro?", title= op)
     if rta == "yes":
         return 1
     else:

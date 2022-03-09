@@ -9,12 +9,12 @@ import funciones_botones as fb
 ##############################################
 
 def cancelar():
-    rta = fb.cartel_confirma()
+    rta = fb.cartel_confirma("Cancelar pedido")
     if rta == 1:
         fb.borrar_campos()
 
 def salir():
-    rta = fb.cartel_confirma()
+    rta = fb.cartel_confirma("Salir de la app")
     if rta == 1:
         fb.cerrar_app()
             

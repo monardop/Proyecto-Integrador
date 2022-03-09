@@ -10,9 +10,7 @@ class App(Frame):
     def initUI(self):
         self.master.title("Delivery")
         self.master.config(padx=20, pady=20) #agrego un poco de padding a la ventana
-
-
-        #configure the grid
+        
         self.columnconfigure(0, pad=10)
         self.columnconfigure(1, pad=3)
         self.columnconfigure(2, pad=10)
@@ -46,16 +44,16 @@ class App(Frame):
         cli = Entry(self, width=15).grid(column=3, row=6)
 
         #botones
-        salida = Button(self, text="Salir", width=15, pady=5, command= bt.salir())
+        salida = Button(self, text="Salir", width=15, pady=5)
         salida.grid(row=7, column=1)
-        cancel = Button(self, text="Cancelar pedido", width=15, pady=5, command= bt.cancelar())
+        cancel = Button(self, text="Cancelar pedido", width=15, pady=5)
         cancel.grid(row=7, column=2)
-        submit = Button(self, text="Hacer pedido", width=15, pady=5, command= bt.confirmar())
+        submit = Button(self, text="Hacer pedido", width=15, pady=5)
         submit.grid(row=7, column=3)
         self.pack()
 
 def main():
-    root = Tk() #creo la ventana
+    root = Tk() 
     app = App()
     root.mainloop()
 
