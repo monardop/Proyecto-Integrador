@@ -9,11 +9,11 @@ import sqlite3
 ###################################################################
 
 def borrar_campos():
-    gui.cS.delete()
-    gui.cD.delete()
-    gui.cT.delete()
-    gui.pos.delete()
-    gui.cli.delete()
+    gui.app.cS.delete()
+    gui.app.cD.delete()
+    gui.app.cT.delete()
+    gui.app.pos.delete()
+    gui.app.cli.delete()
 
 def cartel_confirma(op: str):
     rta = messagebox.askquestion(message="¿Está seguro?", title= op)
@@ -25,7 +25,7 @@ def cartel_confirma(op: str):
 def cheq_vendedor():
     #Esta función chequea que el vendedor anterior sea el mismo que en el nuevo pedido. De serlo, se suma el total. En caso contrario, se envía los datos para llenar registro. 
     
-    vendedor = str(gui.en.get())
+    vendedor = str(gui.app.en.get())
     if vendedor == "":
         messagebox.showerror(title="Error", message="No ingresó el nombre de vendedor")
         return 1
@@ -61,7 +61,7 @@ def cheq_vendedor():
 
 def cerrar_app():
     #Funcion del boton salir. Básicamente crea un .txt que guardara el nombre del ultimo vendedor 
-    vendedor = str(gui.en.get())
+    vendedor = str(gui.self.en.get())
     with open("Vendedor.txt", "w") as f:
         f.write(vendedor)
     messagebox.showinfo(title="Salir", message="Cerrando app")
@@ -89,15 +89,23 @@ def control_validez(x, elem: str):
 def crear_venta():
     """Con la variable x creo una bandera para identificar si hubo un error al cargar los datos, dado que estos serán ingresados de forma manual y estos no pueden ser algo distinto de un entero positivo.
     Una vez comprobado los datos, creo el objeto venta que se encarga de obtener precios y cargarlos al servidor. De este objeto me llevo el total de esa venta."""
-    comboS = gui.cS.get()
+    comboS = gui.app.cS.get()
+    if comboS == "":
+        comboS=0
     x = control_validez(comboS, "Combo Simple")
-    comboD = gui.cD.get()
+    comboD = gui.app.cD.get()
+    if comboD == "":
+        comboD=0
     x = control_validez(comboD, "Combo doble")
-    comboT = gui.cT.get()
+    comboT = gui.app.cT.get()
+    if comboT == "":
+        comboT=0
     x = control_validez(comboT, "Combo triple")
-    postre = gui.pos.get()
+    postre = gui.app.pos.get()
+    if postre == "":
+        postre = 0
     x = control_validez(postre, "Postre")
-    cliente = str(gui.cli.get())
+    cliente = str(gui.app.cli.get())
     if cliente == "":
         messagebox.showerror(title="Error", message="Error en el ingreso de datos de cliente")
         x = 1

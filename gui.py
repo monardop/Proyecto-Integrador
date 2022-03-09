@@ -1,5 +1,7 @@
 from tkinter import *
 import botones as bt
+from tkinter import messagebox
+import sys
 
 class App(Frame):
     def __init__(self):
@@ -36,12 +38,12 @@ class App(Frame):
 
         #text input
         #Entry es un label que permite ingresar texto en pequeñas cantidades
-        en = Entry(self, width=15).grid(column=3, row=1)
-        cS = Entry(self, width=15).grid(column=3, row=2)
-        cD = Entry(self, width=15).grid(column=3, row=3)
-        cT = Entry(self, width=15).grid(column=3, row=4)
-        pos = Entry(self, width=15).grid(column=3, row=5)
-        cli = Entry(self, width=15).grid(column=3, row=6)
+        self.en = Entry(self, width=15).grid(column=3, row=1)
+        self.cS = Entry(self, width=15).grid(column=3, row=2)
+        self.cD = Entry(self, width=15).grid(column=3, row=3)
+        self.cT = Entry(self, width=15).grid(column=3, row=4)
+        self.pos = Entry(self, width=15).grid(column=3, row=5)
+        self.cli = Entry(self, width=15).grid(column=3, row=6)
 
         #botones
         salida = Button(self, text="Salir", width=15, pady=5)
@@ -51,12 +53,12 @@ class App(Frame):
         submit = Button(self, text="Hacer pedido", width=15, pady=5)
         submit.grid(row=7, column=3)
         self.pack()
-
+    
 def main():
     root = Tk() 
     app = App()
     root.mainloop()
-
+    
 if __name__ == '__main__':
     main()
 
